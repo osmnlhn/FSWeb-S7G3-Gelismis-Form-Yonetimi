@@ -37,8 +37,10 @@ const Form = ({users, setUsers}) => {
     }, [formData]);
 
     const handleFormDataChange = (e) => {
+        
         let name = e.target.name;
         let value = e.target.name === "tc" ? e.target.checked : e.target.value;
+        setFormData({...formData,[name]: value});
 
         Yup.reach(formSchema, name)
             .validate(value)
@@ -52,11 +54,7 @@ const Form = ({users, setUsers}) => {
                 });
             });
 
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-
+        
     }
 
     const handleSubmit = (e) => {
@@ -80,7 +78,7 @@ const Form = ({users, setUsers}) => {
     return (
         <div>
             <form>
-
+                    <div >
                     <label>
                         Ad Soyad&nbsp;
                         <input
@@ -90,9 +88,10 @@ const Form = ({users, setUsers}) => {
                             onChange={handleFormDataChange}
                         />
                     </label>
-                    {errors.name ? <p style={{ color: "red" }}>{errors.name}</p> : null}
-
-
+                    
+                    {errors.name ? <p style={{ color: "red" }}>{errors.name}</p> : null }
+                    </div>
+                    <div className='input-error email-vlaidation-msg' >
                     <label>
                         Email&nbsp;
                         <input
@@ -103,7 +102,8 @@ const Form = ({users, setUsers}) => {
                         />
                     </label>
                     {errors.email ? <p style={{ color: "red" }}>{errors.email}</p> : null}
-
+                    </div>
+                    <div>
                     <label>
                         Password&nbsp;
                         <input
@@ -114,7 +114,8 @@ const Form = ({users, setUsers}) => {
                         />
                     </label>
                     {errors.password ? <p style={{ color: "red" }}>{errors.password}</p> : null}
-
+                    </div>
+                    <div>
                     <label>
                         <input
                             type="checkbox"
@@ -125,16 +126,16 @@ const Form = ({users, setUsers}) => {
                         I accept Term and Conditon
                     </label>
                     {errors.tc ? <p style={{ color: "red" }}>{errors.tc}</p> : null}
-    
-
+                    </div>
+                    <div>
                     <input
                         type="submit"
                         disabled={buttonDisabled}
                         onClick={handleSubmit}
                     />
-
+                   </div>
             </form>
-            <button onClick={handleUsers}>Kullanicilar</button>
+            <button id="user-form-btn" onClick={handleUsers}>Kullanicilar</button>
         </div>
     )
 }

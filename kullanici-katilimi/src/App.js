@@ -6,7 +6,7 @@ import Users from './Users';
 function App() {
   const [users, setUsers] = useState([]);
   return (
-    <div className="App-Header">
+    <div className="App">
       <Form users={users} setUsers={setUsers} />
       <Users users={users} />
     </div>
